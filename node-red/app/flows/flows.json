@@ -1,0 +1,1413 @@
+[
+    {
+        "id": "a0a19026ee2aa347",
+        "type": "tab",
+        "label": "GPIO functions",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e2b82f0390a73669",
+        "type": "tab",
+        "label": "Movements",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b41ca36cf9e24066",
+        "type": "tab",
+        "label": "Interface",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "42d0a25edf1ac238",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d815f437cb322805",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Chicken Run !",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "none",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "b298657eb8406325",
+        "type": "ui_group",
+        "name": "Manual Control",
+        "tab": "42d0a25edf1ac238",
+        "order": 1,
+        "disp": true,
+        "width": "4",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7c02300911d9128f",
+        "type": "rpi-gpio out",
+        "z": "a0a19026ee2aa347",
+        "name": "EN (17)",
+        "pin": "17",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 860,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c00e85be68a729eb",
+        "type": "rpi-gpio out",
+        "z": "a0a19026ee2aa347",
+        "name": "ENB(27)",
+        "pin": "27",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 860,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "1ca9a8bc0450a449",
+        "type": "inject",
+        "z": "a0a19026ee2aa347",
+        "name": "Enable Driver",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "enable",
+        "payloadType": "str",
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "3ad4666bc3318248"
+            ]
+        ]
+    },
+    {
+        "id": "59c9ea9241657625",
+        "type": "function",
+        "z": "a0a19026ee2aa347",
+        "name": "function 1",
+        "func": "\nif (msg.payload === \"enable\")\n{\n    var msg1 = { payload : 1 };\n    var msg2 = { payload: 0 };\n}\nelse if (msg.payload === \"disable\" || msg.payload === \"stop\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 1 };\n}\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 100,
+        "wires": [
+            [
+                "7c02300911d9128f"
+            ],
+            [
+                "c00e85be68a729eb"
+            ]
+        ]
+    },
+    {
+        "id": "2a0ea535d08c54dc",
+        "type": "inject",
+        "z": "a0a19026ee2aa347",
+        "name": "Disable Driver",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "disable",
+        "payloadType": "str",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "bfc5f80fe588ce6a"
+            ]
+        ]
+    },
+    {
+        "id": "1ca3854619153ebe",
+        "type": "rpi-gpio out",
+        "z": "a0a19026ee2aa347",
+        "name": "Forward PWM (23)",
+        "pin": "23",
+        "set": "",
+        "level": "0",
+        "freq": "2000",
+        "out": "pwm",
+        "bcm": true,
+        "x": 890,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "f9ffd7e9b6b6ed6e",
+        "type": "rpi-gpio out",
+        "z": "a0a19026ee2aa347",
+        "name": "Backward PWM (24)",
+        "pin": "24",
+        "set": "",
+        "level": "0",
+        "freq": "2000",
+        "out": "pwm",
+        "bcm": true,
+        "x": 900,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8245f8f083f23278",
+        "type": "inject",
+        "z": "a0a19026ee2aa347",
+        "name": "Move Forward",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "forward",
+        "payloadType": "str",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "b15c3f20895f355d"
+            ]
+        ]
+    },
+    {
+        "id": "636ae1d3f3f88463",
+        "type": "inject",
+        "z": "a0a19026ee2aa347",
+        "name": "Move Backward",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "backward",
+        "payloadType": "str",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "411918cc1ff3420e"
+            ]
+        ]
+    },
+    {
+        "id": "9a75465297433178",
+        "type": "function",
+        "z": "a0a19026ee2aa347",
+        "name": "function 2",
+        "func": "\nif (msg.payload === \"forward\")\n{\n    var msg1 = { payload : 100 };\n    var msg2 = { payload: 0 };\n}\nelse if (msg.payload === \"backward\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 100 };\n}\nelse if (msg.payload === \"stop\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 0 };\n}\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 260,
+        "wires": [
+            [
+                "1ca3854619153ebe"
+            ],
+            [
+                "f9ffd7e9b6b6ed6e"
+            ]
+        ]
+    },
+    {
+        "id": "b406154ba8cd0f16",
+        "type": "inject",
+        "z": "a0a19026ee2aa347",
+        "name": "Stop Movement",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "stop",
+        "payloadType": "str",
+        "x": 160,
+        "y": 220,
+        "wires": [
+            [
+                "eb9a1c641ec099e0"
+            ]
+        ]
+    },
+    {
+        "id": "272391d7ba160d1f",
+        "type": "rpi-gpio in",
+        "z": "a0a19026ee2aa347",
+        "name": "End Switch (12)",
+        "pin": "12",
+        "intype": "up",
+        "debounce": "50",
+        "read": true,
+        "bcm": true,
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "215e37e33bc1bec9"
+            ]
+        ]
+    },
+    {
+        "id": "6d433e31928f676a",
+        "type": "debug",
+        "z": "a0a19026ee2aa347",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "215e37e33bc1bec9",
+        "type": "switch",
+        "z": "a0a19026ee2aa347",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 460,
+        "wires": [
+            [
+                "f57070243c960aa7"
+            ],
+            [
+                "db3f8ba0c99337dc"
+            ]
+        ]
+    },
+    {
+        "id": "f57070243c960aa7",
+        "type": "change",
+        "z": "a0a19026ee2aa347",
+        "name": "Switch is closed",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Limit switch closed",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "switchStatus",
+                "pt": "global",
+                "to": "closed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 440,
+        "wires": [
+            [
+                "6d433e31928f676a",
+                "7222be0645547969"
+            ]
+        ]
+    },
+    {
+        "id": "76f655f507daccca",
+        "type": "debug",
+        "z": "a0a19026ee2aa347",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "db3f8ba0c99337dc",
+        "type": "change",
+        "z": "a0a19026ee2aa347",
+        "name": "Switch is opened",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Limit switch open",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "switchStatus",
+                "pt": "global",
+                "to": "open",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 480,
+        "wires": [
+            [
+                "76f655f507daccca"
+            ]
+        ]
+    },
+    {
+        "id": "3712f0cc13b5575e",
+        "type": "link in",
+        "z": "a0a19026ee2aa347",
+        "name": "Stop movement",
+        "links": [
+            "18ca05d70a706a24",
+            "7222be0645547969",
+            "73d868affed219d7",
+            "7d1bdd544ade3ada",
+            "ee84a76abb2b6f51"
+        ],
+        "x": 295,
+        "y": 200,
+        "wires": [
+            [
+                "eb9a1c641ec099e0"
+            ]
+        ]
+    },
+    {
+        "id": "895e66b3fd1a3074",
+        "type": "link in",
+        "z": "a0a19026ee2aa347",
+        "name": "Enable Driver",
+        "links": [
+            "1961df39fe58095c",
+            "6966829fc0e6b429"
+        ],
+        "x": 345,
+        "y": 60,
+        "wires": [
+            [
+                "3ad4666bc3318248"
+            ]
+        ]
+    },
+    {
+        "id": "ce1e828ca7718674",
+        "type": "link in",
+        "z": "a0a19026ee2aa347",
+        "name": "Backward Rotation",
+        "links": [
+            "53c54f188520f305"
+        ],
+        "x": 295,
+        "y": 280,
+        "wires": [
+            [
+                "411918cc1ff3420e"
+            ]
+        ]
+    },
+    {
+        "id": "7222be0645547969",
+        "type": "link out",
+        "z": "a0a19026ee2aa347",
+        "name": "Stop Movement",
+        "mode": "link",
+        "links": [
+            "3712f0cc13b5575e"
+        ],
+        "x": 695,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "eb9a1c641ec099e0",
+        "type": "change",
+        "z": "a0a19026ee2aa347",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 220,
+        "wires": [
+            [
+                "9a75465297433178",
+                "bfc5f80fe588ce6a"
+            ]
+        ]
+    },
+    {
+        "id": "b15c3f20895f355d",
+        "type": "change",
+        "z": "a0a19026ee2aa347",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "forward",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "9a75465297433178"
+            ]
+        ]
+    },
+    {
+        "id": "411918cc1ff3420e",
+        "type": "change",
+        "z": "a0a19026ee2aa347",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "backward",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "9a75465297433178"
+            ]
+        ]
+    },
+    {
+        "id": "bfc5f80fe588ce6a",
+        "type": "change",
+        "z": "a0a19026ee2aa347",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "disable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [
+                "59c9ea9241657625"
+            ]
+        ]
+    },
+    {
+        "id": "3ad4666bc3318248",
+        "type": "change",
+        "z": "a0a19026ee2aa347",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "enable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 80,
+        "wires": [
+            [
+                "59c9ea9241657625"
+            ]
+        ]
+    },
+    {
+        "id": "7f44ac7fc0bba0c1",
+        "type": "link in",
+        "z": "a0a19026ee2aa347",
+        "name": "Forward Rotation",
+        "links": [
+            "2c6c25189585387b"
+        ],
+        "x": 295,
+        "y": 240,
+        "wires": [
+            [
+                "b15c3f20895f355d"
+            ]
+        ]
+    },
+    {
+        "id": "2640c1a7bd597aea",
+        "type": "inject",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "openDoor",
+        "payloadType": "str",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "0d7bd83efe4a16ca"
+            ]
+        ]
+    },
+    {
+        "id": "0d7bd83efe4a16ca",
+        "type": "switch",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "property": "switchStatus",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "closed",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "open",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "b3c22c048dfdf812"
+            ],
+            [
+                "124de7a218ec7b68"
+            ]
+        ]
+    },
+    {
+        "id": "6801c70188b44bee",
+        "type": "debug",
+        "z": "e2b82f0390a73669",
+        "name": "Door already open",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "print",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b3c22c048dfdf812",
+        "type": "change",
+        "z": "e2b82f0390a73669",
+        "name": "Disable Motor",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "stop",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "print",
+                "pt": "msg",
+                "to": "Door already Open",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 100,
+        "wires": [
+            [
+                "6801c70188b44bee",
+                "ee84a76abb2b6f51"
+            ]
+        ]
+    },
+    {
+        "id": "124de7a218ec7b68",
+        "type": "change",
+        "z": "e2b82f0390a73669",
+        "name": "Enable Driver",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "enable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 160,
+        "wires": [
+            [
+                "6966829fc0e6b429",
+                "323d7e71da5f028b"
+            ]
+        ]
+    },
+    {
+        "id": "ee84a76abb2b6f51",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Stop movement",
+        "mode": "link",
+        "links": [
+            "3712f0cc13b5575e"
+        ],
+        "x": 635,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6966829fc0e6b429",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Enable Driver",
+        "mode": "link",
+        "links": [
+            "895e66b3fd1a3074"
+        ],
+        "x": 635,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "323d7e71da5f028b",
+        "type": "delay",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 200,
+        "wires": [
+            [
+                "53c54f188520f305",
+                "2707d31519e755a8"
+            ]
+        ]
+    },
+    {
+        "id": "53c54f188520f305",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Backward Rotation",
+        "mode": "link",
+        "links": [
+            "ce1e828ca7718674"
+        ],
+        "x": 775,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d0078d7c17c826f0",
+        "type": "inject",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "closeDoor",
+        "payloadType": "str",
+        "x": 120,
+        "y": 380,
+        "wires": [
+            [
+                "3404d611edff2f2e"
+            ]
+        ]
+    },
+    {
+        "id": "3404d611edff2f2e",
+        "type": "switch",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "property": "switchStatus",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "open",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "closed",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "7f76e96bc7db5144"
+            ],
+            [
+                "fc4a7c69f842fd77"
+            ]
+        ]
+    },
+    {
+        "id": "772ad042876ec9c8",
+        "type": "debug",
+        "z": "e2b82f0390a73669",
+        "name": "Door already closed",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "print",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "7f76e96bc7db5144",
+        "type": "change",
+        "z": "e2b82f0390a73669",
+        "name": "Disable Motor",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "stop",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "print",
+                "pt": "msg",
+                "to": "Door already Open",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "772ad042876ec9c8",
+                "7d1bdd544ade3ada"
+            ]
+        ]
+    },
+    {
+        "id": "fc4a7c69f842fd77",
+        "type": "change",
+        "z": "e2b82f0390a73669",
+        "name": "Enable Driver",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "enable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 400,
+        "wires": [
+            [
+                "1961df39fe58095c",
+                "c7f5f93381e31b1e"
+            ]
+        ]
+    },
+    {
+        "id": "7d1bdd544ade3ada",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Stop movement",
+        "mode": "link",
+        "links": [
+            "3712f0cc13b5575e"
+        ],
+        "x": 635,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "1961df39fe58095c",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Enable Driver",
+        "mode": "link",
+        "links": [
+            "895e66b3fd1a3074"
+        ],
+        "x": 635,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "c7f5f93381e31b1e",
+        "type": "delay",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 440,
+        "wires": [
+            [
+                "2c6c25189585387b",
+                "e32774d928fca907"
+            ]
+        ]
+    },
+    {
+        "id": "2c6c25189585387b",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Forward Rotation",
+        "mode": "link",
+        "links": [
+            "7f44ac7fc0bba0c1"
+        ],
+        "x": 795,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "e32774d928fca907",
+        "type": "function",
+        "z": "e2b82f0390a73669",
+        "name": "Wait until closed",
+        "func": "let closingTime = env.get(\"CLOSING_TIME_MS\") !== undefined ? env.get(\"CLOSING_TIME\") : 10000;\n\nmsg.delay = closingTime;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 480,
+        "wires": [
+            [
+                "58c2110cca4befe0"
+            ]
+        ]
+    },
+    {
+        "id": "58c2110cca4befe0",
+        "type": "delay",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 480,
+        "wires": [
+            [
+                "18ca05d70a706a24"
+            ]
+        ]
+    },
+    {
+        "id": "18ca05d70a706a24",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Stop movement",
+        "mode": "link",
+        "links": [
+            "3712f0cc13b5575e"
+        ],
+        "x": 1125,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "2707d31519e755a8",
+        "type": "function",
+        "z": "e2b82f0390a73669",
+        "name": "Wait until opened",
+        "func": "let closingTime = env.get(\"MAX_OPENING_TIME_MS\") !== undefined ? env.get(\"CLOSING_TIME\") : 20000;\n\nmsg.delay = closingTime;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 240,
+        "wires": [
+            [
+                "0d6094efd7768a60"
+            ]
+        ]
+    },
+    {
+        "id": "0d6094efd7768a60",
+        "type": "delay",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 240,
+        "wires": [
+            [
+                "73d868affed219d7"
+            ]
+        ]
+    },
+    {
+        "id": "73d868affed219d7",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Stop movement",
+        "mode": "link",
+        "links": [
+            "3712f0cc13b5575e"
+        ],
+        "x": 1115,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "a1b6d2503bf369bd",
+        "type": "link in",
+        "z": "e2b82f0390a73669",
+        "name": "Open Door",
+        "links": [
+            "1df5e9f4e1dc4484"
+        ],
+        "x": 165,
+        "y": 100,
+        "wires": [
+            [
+                "0d7bd83efe4a16ca"
+            ]
+        ]
+    },
+    {
+        "id": "94f3a7b5589a92f1",
+        "type": "link in",
+        "z": "e2b82f0390a73669",
+        "name": "Close Door",
+        "links": [
+            "681097c5f8df222e"
+        ],
+        "x": 165,
+        "y": 340,
+        "wires": [
+            [
+                "3404d611edff2f2e"
+            ]
+        ]
+    },
+    {
+        "id": "49fbfc49a2b27486",
+        "type": "ui_button",
+        "z": "b41ca36cf9e24066",
+        "name": "Open Door",
+        "group": "b298657eb8406325",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Open Door",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "open",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "1df5e9f4e1dc4484"
+            ]
+        ]
+    },
+    {
+        "id": "0454aace3ca36c8a",
+        "type": "ui_button",
+        "z": "b41ca36cf9e24066",
+        "name": "Close Door",
+        "group": "b298657eb8406325",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Close Door",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "close",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "681097c5f8df222e"
+            ]
+        ]
+    },
+    {
+        "id": "1df5e9f4e1dc4484",
+        "type": "link out",
+        "z": "b41ca36cf9e24066",
+        "name": "Open Door",
+        "mode": "link",
+        "links": [
+            "a1b6d2503bf369bd"
+        ],
+        "x": 305,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "681097c5f8df222e",
+        "type": "link out",
+        "z": "b41ca36cf9e24066",
+        "name": "Close Door",
+        "mode": "link",
+        "links": [
+            "94f3a7b5589a92f1"
+        ],
+        "x": 305,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "524cf67be1c41704",
+        "type": "sun-event-inject",
+        "z": "b41ca36cf9e24066",
+        "name": "Day",
+        "latitude": "44.13047432586525",
+        "longitude": "1.925919304576335",
+        "event": "sunrise",
+        "offset": "3600",
+        "injectEventTimesAfterStartup": false,
+        "x": 170,
+        "y": 40,
+        "wires": [
+            [
+                "1df5e9f4e1dc4484"
+            ]
+        ]
+    },
+    {
+        "id": "9f216d5a3f280952",
+        "type": "sun-event-inject",
+        "z": "b41ca36cf9e24066",
+        "name": "Night",
+        "latitude": "44.13047432586525",
+        "longitude": "1.925919304576335",
+        "event": "nauticalDusk",
+        "offset": "3600",
+        "injectEventTimesAfterStartup": false,
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "681097c5f8df222e"
+            ]
+        ]
+    }
+]
