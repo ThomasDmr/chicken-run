@@ -326,7 +326,7 @@
         "type": "function",
         "z": "a0a19026ee2aa347",
         "name": "function 2",
-        "func": "\nif (msg.payload === \"forward\")\n{\n    var msg1 = { payload : 100 };\n    var msg2 = { payload: 0 };\n}\nelse if (msg.payload === \"backward\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 100 };\n}\nelse if (msg.payload === \"stop\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 0 };\n}\nreturn [msg1, msg2];",
+        "func": "let speed = 50;\n\nif (msg.payload === \"forward\")\n{\n    var msg1 = { payload : speed };\n    var msg2 = { payload: 0 };\n}\nelse if (msg.payload === \"backward\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: speed };\n}\nelse if (msg.payload === \"stop\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 0 };\n}\nreturn [msg1, msg2];",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -1151,7 +1151,7 @@
         "type": "function",
         "z": "e2b82f0390a73669",
         "name": "Wait until closed",
-        "func": "let closingTime = env.get(\"CLOSING_TIME_MS\") !== undefined ? env.get(\"CLOSING_TIME\") : 10000;\n\nmsg.delay = closingTime;\n\nreturn msg;",
+        "func": "let closingTime = env.get(\"CLOSING_TIME_MS\") !== undefined ? env.get(\"CLOSING_TIME\") : 3000;\n\nmsg.delay = closingTime;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1208,7 +1208,7 @@
         "type": "function",
         "z": "e2b82f0390a73669",
         "name": "Wait until opened",
-        "func": "let closingTime = env.get(\"MAX_OPENING_TIME_MS\") !== undefined ? env.get(\"CLOSING_TIME\") : 20000;\n\nmsg.delay = closingTime;\n\nreturn msg;",
+        "func": "let closingTime = env.get(\"MAX_OPENING_TIME_MS\") !== undefined ? env.get(\"MAX_OPENING_TIME_MS\") : 5000;\n\nmsg.delay = closingTime;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1407,6 +1407,73 @@
         "wires": [
             [
                 "681097c5f8df222e"
+            ]
+        ]
+    },
+    {
+        "id": "98c3cd522a775c5c",
+        "type": "exec",
+        "z": "b41ca36cf9e24066",
+        "command": "mpg123",
+        "addpay": false,
+        "append": "/usr/src/app/sounds/test.mp3",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "name": "play mp3",
+        "x": 465.33331298828125,
+        "y": 520.3333129882812,
+        "wires": [
+            [],
+            [
+                "2a9e1bee5c70c963"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2a9e1bee5c70c963",
+        "type": "debug",
+        "z": "b41ca36cf9e24066",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "451d57676d53365d",
+        "type": "inject",
+        "z": "b41ca36cf9e24066",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 520,
+        "wires": [
+            [
+                "98c3cd522a775c5c"
             ]
         ]
     }
