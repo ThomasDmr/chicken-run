@@ -1210,6 +1210,7 @@
         "name": "Wait until opened",
         "func": "let closingTime = env.get(\"MAX_OPENING_TIME_MS\") !== undefined ? env.get(\"MAX_OPENING_TIME_MS\") : 5000;\n\nmsg.delay = closingTime;\n\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -1312,8 +1313,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 150,
-        "y": 80,
+        "x": 170,
+        "y": 100,
         "wires": [
             [
                 "1df5e9f4e1dc4484"
@@ -1340,8 +1341,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 150,
-        "y": 140,
+        "x": 170,
+        "y": 160,
         "wires": [
             [
                 "681097c5f8df222e"
@@ -1357,8 +1358,8 @@
         "links": [
             "a1b6d2503bf369bd"
         ],
-        "x": 305,
-        "y": 80,
+        "x": 325,
+        "y": 100,
         "wires": []
     },
     {
@@ -1370,45 +1371,9 @@
         "links": [
             "94f3a7b5589a92f1"
         ],
-        "x": 305,
-        "y": 140,
+        "x": 325,
+        "y": 160,
         "wires": []
-    },
-    {
-        "id": "524cf67be1c41704",
-        "type": "sun-event-inject",
-        "z": "b41ca36cf9e24066",
-        "name": "Day",
-        "latitude": "44.13047432586525",
-        "longitude": "1.925919304576335",
-        "event": "sunrise",
-        "offset": "3600",
-        "injectEventTimesAfterStartup": false,
-        "x": 170,
-        "y": 40,
-        "wires": [
-            [
-                "1df5e9f4e1dc4484"
-            ]
-        ]
-    },
-    {
-        "id": "9f216d5a3f280952",
-        "type": "sun-event-inject",
-        "z": "b41ca36cf9e24066",
-        "name": "Night",
-        "latitude": "44.13047432586525",
-        "longitude": "1.925919304576335",
-        "event": "sunset",
-        "offset": "2700",
-        "injectEventTimesAfterStartup": false,
-        "x": 170,
-        "y": 180,
-        "wires": [
-            [
-                "681097c5f8df222e"
-            ]
-        ]
     },
     {
         "id": "98c3cd522a775c5c",
@@ -1474,6 +1439,199 @@
         "wires": [
             [
                 "98c3cd522a775c5c"
+            ]
+        ]
+    },
+    {
+        "id": "d68323b6e99c9048",
+        "type": "sun events",
+        "z": "b41ca36cf9e24066",
+        "testmode": false,
+        "verbose": "N",
+        "topic": "",
+        "name": "",
+        "x": 570,
+        "y": 300,
+        "wires": [
+            [
+                "76a2c1e578422047"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "04f9fda83b6719bb",
+        "type": "inject",
+        "z": "b41ca36cf9e24066",
+        "name": "Reset",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "8320073a19a7915e"
+            ]
+        ]
+    },
+    {
+        "id": "8320073a19a7915e",
+        "type": "function",
+        "z": "b41ca36cf9e24066",
+        "name": "Get Lon/Lat Coordinates",
+        "func": "let longitude = Number(env.get(\"LONGITUDE\") ?? 1.925919304576335);\nlet latitude = Number(env.get(\"LATITUDE\") ?? 44.13047432586525);\n\nmsg.payload = {\n    \"longitude\": longitude,\n    \"latitude\" : latitude\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "d68323b6e99c9048"
+            ]
+        ]
+    },
+    {
+        "id": "8a0f324d803f9c18",
+        "type": "delay",
+        "z": "b41ca36cf9e24066",
+        "name": "Sunrise Delay",
+        "pauseType": "delayv",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 280,
+        "wires": [
+            [
+                "b769341d3cb84192"
+            ]
+        ]
+    },
+    {
+        "id": "927513d5b5841aea",
+        "type": "delay",
+        "z": "b41ca36cf9e24066",
+        "name": "Sunset Delay",
+        "pauseType": "delayv",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 320,
+        "wires": [
+            [
+                "185e4cb0c05504e5"
+            ]
+        ]
+    },
+    {
+        "id": "76a2c1e578422047",
+        "type": "function",
+        "z": "b41ca36cf9e24066",
+        "name": "Check Sun Event",
+        "func": "let msg1 = {};\nlet msg2 = {};\n\nlet sunrise_delay = Number(env.get(\"DELAY_AFTER_SUNRISE\") ?? 3600);\nlet sunset_delay = Number(env.get(\"DELAY_AFTER_SUNSET\") ?? 2700);\n\n\nif(msg.payload.sunevent === \"sunrise\")\n{\n    msg1.delay = sunrise_delay * 1000;\n    return [msg1, null];\n}\nelse if (msg.payload.sunevent === \"sunset\") {\n    msg2.delay = sunset_delay * 1000;\n    return [null, msg2];\n}\nelse\n{\n    return [null, null];\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 300,
+        "wires": [
+            [
+                "8a0f324d803f9c18"
+            ],
+            [
+                "927513d5b5841aea"
+            ]
+        ]
+    },
+    {
+        "id": "b769341d3cb84192",
+        "type": "link out",
+        "z": "b41ca36cf9e24066",
+        "name": "Day Trigger",
+        "mode": "link",
+        "links": [
+            "b6d81c93f138fd0d"
+        ],
+        "x": 1145,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "185e4cb0c05504e5",
+        "type": "link out",
+        "z": "b41ca36cf9e24066",
+        "name": "Night Trigger",
+        "mode": "link",
+        "links": [
+            "adaa373b0354fb61"
+        ],
+        "x": 1145,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b6d81c93f138fd0d",
+        "type": "link in",
+        "z": "b41ca36cf9e24066",
+        "name": "Trigger Day",
+        "links": [
+            "b769341d3cb84192"
+        ],
+        "x": 225,
+        "y": 60,
+        "wires": [
+            [
+                "1df5e9f4e1dc4484"
+            ]
+        ]
+    },
+    {
+        "id": "adaa373b0354fb61",
+        "type": "link in",
+        "z": "b41ca36cf9e24066",
+        "name": "Trigger NIght",
+        "links": [
+            "185e4cb0c05504e5"
+        ],
+        "x": 225,
+        "y": 200,
+        "wires": [
+            [
+                "681097c5f8df222e"
             ]
         ]
     }
