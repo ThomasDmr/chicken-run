@@ -964,39 +964,6 @@
         "y": 380,
         "wires": [
             [
-                "3404d611edff2f2e"
-            ]
-        ]
-    },
-    {
-        "id": "3404d611edff2f2e",
-        "type": "switch",
-        "z": "e2b82f0390a73669",
-        "name": "",
-        "property": "switchStatus",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "open",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "closed",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 270,
-        "y": 380,
-        "wires": [
-            [
-                "7f76e96bc7db5144"
-            ],
-            [
                 "fc4a7c69f842fd77"
             ]
         ]
@@ -1005,6 +972,7 @@
         "id": "772ad042876ec9c8",
         "type": "debug",
         "z": "e2b82f0390a73669",
+        "d": true,
         "name": "Door already closed",
         "active": true,
         "tosidebar": true,
@@ -1022,6 +990,7 @@
         "id": "7f76e96bc7db5144",
         "type": "change",
         "z": "e2b82f0390a73669",
+        "d": true,
         "name": "Disable Motor",
         "rules": [
             {
@@ -1085,6 +1054,7 @@
         "id": "7d1bdd544ade3ada",
         "type": "link out",
         "z": "e2b82f0390a73669",
+        "d": true,
         "name": "Stop movement",
         "mode": "link",
         "links": [
@@ -1289,7 +1259,7 @@
         "y": 340,
         "wires": [
             [
-                "3404d611edff2f2e"
+                "fc4a7c69f842fd77"
             ]
         ]
     },
