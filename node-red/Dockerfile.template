@@ -25,7 +25,7 @@ RUN JOBS=MAX npm install -g --production --unsafe-perm \
     node-red-node-serialport\
     node-red-node-pi-gpio\
     node-red-dashboard\
-    node-red-contrib-sun-event-trigger\
+    node-red-contrib-sunevents\
     && JOBS=MAX npm install --unsafe-perm --production && npm cache clean --force
 
 # Copy over the files created in the previous step, including lib/, bin/
