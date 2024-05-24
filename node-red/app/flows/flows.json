@@ -140,6 +140,17 @@
         "className": ""
     },
     {
+        "id": "ec6a59a812ad5704",
+        "type": "ui_group",
+        "name": "Forced Movements (ignore safeties)",
+        "tab": "42d0a25edf1ac238",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
         "id": "7c02300911d9128f",
         "type": "rpi-gpio out",
         "z": "a0a19026ee2aa347",
@@ -201,6 +212,7 @@
         "name": "function 1",
         "func": "\nif (msg.payload === \"enable\")\n{\n    var msg1 = { payload : 1 };\n    var msg2 = { payload: 0 };\n}\nelse if (msg.payload === \"disable\" || msg.payload === \"stop\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 1 };\n}\nreturn [msg1, msg2];",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -758,7 +770,7 @@
         "payload": "openDoor",
         "payloadType": "str",
         "x": 120,
-        "y": 140,
+        "y": 220,
         "wires": [
             [
                 "0d7bd83efe4a16ca"
@@ -770,7 +782,7 @@
         "type": "switch",
         "z": "e2b82f0390a73669",
         "name": "",
-        "property": "switchStatus",
+        "property": "doorStatus",
         "propertyType": "global",
         "rules": [
             {
@@ -782,14 +794,22 @@
                 "t": "eq",
                 "v": "open",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "unknown",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
-        "x": 270,
-        "y": 140,
+        "outputs": 3,
+        "x": 280,
+        "y": 220,
         "wires": [
+            [
+                "124de7a218ec7b68"
+            ],
             [
                 "b3c22c048dfdf812"
             ],
@@ -811,8 +831,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 710,
-        "y": 100,
+        "x": 690,
+        "y": 200,
         "wires": []
     },
     {
@@ -842,7 +862,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 100,
+        "y": 200,
         "wires": [
             [
                 "6801c70188b44bee",
@@ -870,7 +890,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 160,
+        "y": 240,
         "wires": [
             [
                 "6966829fc0e6b429",
@@ -887,8 +907,8 @@
         "links": [
             "3712f0cc13b5575e"
         ],
-        "x": 635,
-        "y": 60,
+        "x": 615,
+        "y": 160,
         "wires": []
     },
     {
@@ -900,8 +920,8 @@
         "links": [
             "895e66b3fd1a3074"
         ],
-        "x": 635,
-        "y": 160,
+        "x": 615,
+        "y": 260,
         "wires": []
     },
     {
@@ -921,8 +941,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 680,
-        "y": 200,
+        "x": 660,
+        "y": 300,
         "wires": [
             [
                 "53c54f188520f305",
@@ -939,8 +959,8 @@
         "links": [
             "ce1e828ca7718674"
         ],
-        "x": 775,
-        "y": 200,
+        "x": 765,
+        "y": 300,
         "wires": []
     },
     {
@@ -961,10 +981,10 @@
         "payload": "closeDoor",
         "payloadType": "str",
         "x": 120,
-        "y": 380,
+        "y": 480,
         "wires": [
             [
-                "fc4a7c69f842fd77"
+                "ddeb83e1297340db"
             ]
         ]
     },
@@ -972,7 +992,6 @@
         "id": "772ad042876ec9c8",
         "type": "debug",
         "z": "e2b82f0390a73669",
-        "d": true,
         "name": "Door already closed",
         "active": true,
         "tosidebar": true,
@@ -983,14 +1002,13 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 720,
-        "y": 340,
+        "y": 420,
         "wires": []
     },
     {
         "id": "7f76e96bc7db5144",
         "type": "change",
         "z": "e2b82f0390a73669",
-        "d": true,
         "name": "Disable Motor",
         "rules": [
             {
@@ -1004,7 +1022,7 @@
                 "t": "set",
                 "p": "print",
                 "pt": "msg",
-                "to": "Door already Open",
+                "to": "Door already Closed",
                 "tot": "str"
             }
         ],
@@ -1014,7 +1032,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 340,
+        "y": 420,
         "wires": [
             [
                 "772ad042876ec9c8",
@@ -1042,7 +1060,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 400,
+        "y": 480,
         "wires": [
             [
                 "1961df39fe58095c",
@@ -1054,14 +1072,13 @@
         "id": "7d1bdd544ade3ada",
         "type": "link out",
         "z": "e2b82f0390a73669",
-        "d": true,
         "name": "Stop movement",
         "mode": "link",
         "links": [
             "3712f0cc13b5575e"
         ],
         "x": 635,
-        "y": 300,
+        "y": 380,
         "wires": []
     },
     {
@@ -1073,8 +1090,8 @@
         "links": [
             "895e66b3fd1a3074"
         ],
-        "x": 635,
-        "y": 400,
+        "x": 615,
+        "y": 480,
         "wires": []
     },
     {
@@ -1094,8 +1111,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 680,
-        "y": 440,
+        "x": 660,
+        "y": 520,
         "wires": [
             [
                 "2c6c25189585387b",
@@ -1112,8 +1129,8 @@
         "links": [
             "7f44ac7fc0bba0c1"
         ],
-        "x": 795,
-        "y": 440,
+        "x": 765,
+        "y": 520,
         "wires": []
     },
     {
@@ -1127,8 +1144,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 860,
-        "y": 480,
+        "x": 820,
+        "y": 560,
         "wires": [
             [
                 "58c2110cca4befe0"
@@ -1152,11 +1169,11 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1020,
-        "y": 480,
+        "x": 1000,
+        "y": 560,
         "wires": [
             [
-                "18ca05d70a706a24"
+                "3f12457e19c58970"
             ]
         ]
     },
@@ -1169,8 +1186,8 @@
         "links": [
             "3712f0cc13b5575e"
         ],
-        "x": 1125,
-        "y": 480,
+        "x": 1295,
+        "y": 560,
         "wires": []
     },
     {
@@ -1185,8 +1202,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 850,
-        "y": 240,
+        "x": 830,
+        "y": 340,
         "wires": [
             [
                 "0d6094efd7768a60"
@@ -1210,11 +1227,11 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1020,
-        "y": 240,
+        "x": 1000,
+        "y": 340,
         "wires": [
             [
-                "73d868affed219d7"
+                "d7f74417b4fec96d"
             ]
         ]
     },
@@ -1227,8 +1244,8 @@
         "links": [
             "3712f0cc13b5575e"
         ],
-        "x": 1115,
-        "y": 240,
+        "x": 1295,
+        "y": 340,
         "wires": []
     },
     {
@@ -1237,10 +1254,11 @@
         "z": "e2b82f0390a73669",
         "name": "Open Door",
         "links": [
-            "1df5e9f4e1dc4484"
+            "1df5e9f4e1dc4484",
+            "8c7aee96c9f8e37e"
         ],
         "x": 165,
-        "y": 100,
+        "y": 180,
         "wires": [
             [
                 "0d7bd83efe4a16ca"
@@ -1253,10 +1271,315 @@
         "z": "e2b82f0390a73669",
         "name": "Close Door",
         "links": [
-            "681097c5f8df222e"
+            "681097c5f8df222e",
+            "e2c605019cf80e49"
         ],
         "x": 165,
+        "y": 440,
+        "wires": [
+            [
+                "ddeb83e1297340db"
+            ]
+        ]
+    },
+    {
+        "id": "f277defc4d53f0c2",
+        "type": "function",
+        "z": "e2b82f0390a73669",
+        "name": "Init door status",
+        "func": "let doorStatus = global.get(\"doorStatus\") ?? \"unknown\"\n\nglobal.set(\"doorStatus\", doorStatus)\n\nmsg.payload = {\"doorStatus\": doorStatus}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 100,
+        "wires": [
+            [
+                "e0b503016ae54f60"
+            ]
+        ]
+    },
+    {
+        "id": "58ba02e3ba42c51b",
+        "type": "inject",
+        "z": "e2b82f0390a73669",
+        "name": "Reset",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "f277defc4d53f0c2"
+            ]
+        ]
+    },
+    {
+        "id": "e0b503016ae54f60",
+        "type": "debug",
+        "z": "e2b82f0390a73669",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ddeb83e1297340db",
+        "type": "switch",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "property": "doorStatus",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "closed",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "open",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "unknown",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 280,
+        "y": 480,
+        "wires": [
+            [
+                "7f76e96bc7db5144"
+            ],
+            [
+                "fc4a7c69f842fd77"
+            ],
+            [
+                "8c7aee96c9f8e37e",
+                "d2af847a5cda1642"
+            ]
+        ]
+    },
+    {
+        "id": "d7f74417b4fec96d",
+        "type": "change",
+        "z": "e2b82f0390a73669",
+        "name": "Update doorStatus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "doorStatus",
+                "pt": "global",
+                "to": "open",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1170,
         "y": 340,
+        "wires": [
+            [
+                "73d868affed219d7"
+            ]
+        ]
+    },
+    {
+        "id": "3f12457e19c58970",
+        "type": "change",
+        "z": "e2b82f0390a73669",
+        "name": "Update doorStatus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "doorStatus",
+                "pt": "global",
+                "to": "closed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1170,
+        "y": 560,
+        "wires": [
+            [
+                "18ca05d70a706a24"
+            ]
+        ]
+    },
+    {
+        "id": "d2af847a5cda1642",
+        "type": "delay",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 520,
+        "y": 640,
+        "wires": [
+            [
+                "e2c605019cf80e49"
+            ]
+        ]
+    },
+    {
+        "id": "8c7aee96c9f8e37e",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Open",
+        "mode": "link",
+        "links": [
+            "a1b6d2503bf369bd"
+        ],
+        "x": 475,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "e2c605019cf80e49",
+        "type": "link out",
+        "z": "e2b82f0390a73669",
+        "name": "Close",
+        "mode": "link",
+        "links": [
+            "94f3a7b5589a92f1"
+        ],
+        "x": 635,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "2ed060b5703c4bbd",
+        "type": "comment",
+        "z": "e2b82f0390a73669",
+        "name": "Open and close door",
+        "info": "",
+        "x": 550,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "6c8b5a44f89f15cc",
+        "type": "inject",
+        "z": "e2b82f0390a73669",
+        "name": "Force Open",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "openDoor",
+        "payloadType": "str",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "124de7a218ec7b68"
+            ]
+        ]
+    },
+    {
+        "id": "2690a45870f62fb4",
+        "type": "inject",
+        "z": "e2b82f0390a73669",
+        "name": "Force Close",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "openDoor",
+        "payloadType": "str",
+        "x": 130,
+        "y": 620,
+        "wires": [
+            [
+                "fc4a7c69f842fd77"
+            ]
+        ]
+    },
+    {
+        "id": "d9078939ca247261",
+        "type": "link in",
+        "z": "e2b82f0390a73669",
+        "name": "Force open",
+        "links": [
+            "29666fbbcc1022f4"
+        ],
+        "x": 185,
+        "y": 340,
+        "wires": [
+            [
+                "124de7a218ec7b68"
+            ]
+        ]
+    },
+    {
+        "id": "6e27952bb1f74aca",
+        "type": "link in",
+        "z": "e2b82f0390a73669",
+        "name": "Force close",
+        "links": [
+            "ea22df458d43b376"
+        ],
+        "x": 185,
+        "y": 660,
         "wires": [
             [
                 "fc4a7c69f842fd77"
@@ -1312,7 +1635,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 170,
-        "y": 160,
+        "y": 200,
         "wires": [
             [
                 "681097c5f8df222e"
@@ -1342,7 +1665,7 @@
             "94f3a7b5589a92f1"
         ],
         "x": 325,
-        "y": 160,
+        "y": 200,
         "wires": []
     },
     {
@@ -1598,11 +1921,93 @@
             "185e4cb0c05504e5"
         ],
         "x": 225,
-        "y": 200,
+        "y": 240,
         "wires": [
             [
                 "681097c5f8df222e"
             ]
         ]
+    },
+    {
+        "id": "f0ba2b43c067e955",
+        "type": "ui_button",
+        "z": "b41ca36cf9e24066",
+        "name": "Force Close Door",
+        "group": "ec6a59a812ad5704",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Force Close Door",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "close",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 630,
+        "y": 120,
+        "wires": [
+            [
+                "ea22df458d43b376"
+            ]
+        ]
+    },
+    {
+        "id": "1723dc9b8ac8248e",
+        "type": "ui_button",
+        "z": "b41ca36cf9e24066",
+        "name": "Force Open Door",
+        "group": "ec6a59a812ad5704",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Force Open Door",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "close",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 630,
+        "y": 180,
+        "wires": [
+            [
+                "29666fbbcc1022f4"
+            ]
+        ]
+    },
+    {
+        "id": "ea22df458d43b376",
+        "type": "link out",
+        "z": "b41ca36cf9e24066",
+        "name": "Force close",
+        "mode": "link",
+        "links": [
+            "6e27952bb1f74aca"
+        ],
+        "x": 765,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "29666fbbcc1022f4",
+        "type": "link out",
+        "z": "b41ca36cf9e24066",
+        "name": "Force open",
+        "mode": "link",
+        "links": [
+            "d9078939ca247261"
+        ],
+        "x": 765,
+        "y": 180,
+        "wires": []
     }
 ]
