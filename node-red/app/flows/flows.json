@@ -544,7 +544,8 @@
             "7222be0645547969",
             "73d868affed219d7",
             "7d1bdd544ade3ada",
-            "ee84a76abb2b6f51"
+            "ee84a76abb2b6f51",
+            "106484253900cc7a"
         ],
         "x": 295,
         "y": 200,
@@ -751,6 +752,116 @@
                 "b15c3f20895f355d"
             ]
         ]
+    },
+    {
+        "id": "98496326d244b7f7",
+        "type": "rpi-gpio in",
+        "z": "a0a19026ee2aa347",
+        "name": "Manual trigger (17)",
+        "pin": "17",
+        "intype": "up",
+        "debounce": "50",
+        "read": true,
+        "bcm": true,
+        "x": 150,
+        "y": 620,
+        "wires": [
+            [
+                "f04ba90f40c4bf50"
+            ]
+        ]
+    },
+    {
+        "id": "f04ba90f40c4bf50",
+        "type": "switch",
+        "z": "a0a19026ee2aa347",
+        "name": "If pressed",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 620,
+        "wires": [
+            [
+                "ccc5304e54d32f11"
+            ]
+        ]
+    },
+    {
+        "id": "ccc5304e54d32f11",
+        "type": "switch",
+        "z": "a0a19026ee2aa347",
+        "name": "Check door status",
+        "property": "doorStatus",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "closed",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "open",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "unknown",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 530,
+        "y": 620,
+        "wires": [
+            [
+                "9a1cec114ebeae36"
+            ],
+            [
+                "0c34329d82699406"
+            ],
+            [
+                "0c34329d82699406"
+            ]
+        ]
+    },
+    {
+        "id": "9a1cec114ebeae36",
+        "type": "link out",
+        "z": "a0a19026ee2aa347",
+        "name": "link out 1",
+        "mode": "link",
+        "links": [
+            "a1b6d2503bf369bd"
+        ],
+        "x": 725,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "0c34329d82699406",
+        "type": "link out",
+        "z": "a0a19026ee2aa347",
+        "name": "link out 2",
+        "mode": "link",
+        "links": [
+            "94f3a7b5589a92f1"
+        ],
+        "x": 725,
+        "y": 640,
+        "wires": []
     },
     {
         "id": "2640c1a7bd597aea",
@@ -1255,7 +1366,8 @@
         "name": "Open Door",
         "links": [
             "1df5e9f4e1dc4484",
-            "8c7aee96c9f8e37e"
+            "8c7aee96c9f8e37e",
+            "9a1cec114ebeae36"
         ],
         "x": 165,
         "y": 180,
@@ -1272,7 +1384,8 @@
         "name": "Close Door",
         "links": [
             "681097c5f8df222e",
-            "e2c605019cf80e49"
+            "e2c605019cf80e49",
+            "0c34329d82699406"
         ],
         "x": 165,
         "y": 440,
@@ -1749,7 +1862,9 @@
             [
                 "76a2c1e578422047"
             ],
-            []
+            [
+                "892ba6f7108dfbdb"
+            ]
         ]
     },
     {
@@ -1782,7 +1897,7 @@
         "type": "function",
         "z": "b41ca36cf9e24066",
         "name": "Get Lon/Lat Coordinates",
-        "func": "let longitude = Number(env.get(\"LONGITUDE\") ?? 1.925919304576335);\nlet latitude = Number(env.get(\"LATITUDE\") ?? 44.13047432586525);\n\nmsg.payload = {\n    \"longitude\": longitude,\n    \"latitude\" : latitude\n};\n\nreturn msg;",
+        "func": "let longitude = Number(env.get(\"LONGITUDE\") ?? 4.325711795788614);\nlet latitude = Number(env.get(\"LATITUDE\") ?? 44.71519892567323);\n\nmsg.payload = {\n    \"longitude\": longitude,\n    \"latitude\" : latitude\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2008,6 +2123,23 @@
         ],
         "x": 765,
         "y": 180,
+        "wires": []
+    },
+    {
+        "id": "892ba6f7108dfbdb",
+        "type": "debug",
+        "z": "b41ca36cf9e24066",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 380,
         "wires": []
     }
 ]
