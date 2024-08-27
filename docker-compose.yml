@@ -1,11 +1,13 @@
 version: '2'
 volumes:
     resin-data:
+    nodered-logs:
 services:
   node-red:
     build: ./node-red
     volumes:
       - 'resin-data:/data'
+      - 'nodered-logs:/logs'
     restart: always
     privileged: true
     network_mode: host

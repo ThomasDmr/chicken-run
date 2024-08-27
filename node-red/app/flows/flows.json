@@ -151,6 +151,18 @@
         "className": ""
     },
     {
+        "id": "024210e38cb617e0",
+        "type": "config-log",
+        "logname": "standard-logging",
+        "logdir": "logs",
+        "stamp": "local",
+        "logstyle": "plain",
+        "logrotate": true,
+        "logcompress": false,
+        "logrotatecount": "5",
+        "logsize": "1000"
+    },
+    {
         "id": "7c02300911d9128f",
         "type": "rpi-gpio out",
         "z": "a0a19026ee2aa347",
@@ -161,7 +173,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 860,
+        "x": 1080,
         "y": 80,
         "wires": []
     },
@@ -176,7 +188,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 860,
+        "x": 1080,
         "y": 120,
         "wires": []
     },
@@ -217,7 +229,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
+        "x": 880,
         "y": 100,
         "wires": [
             [
@@ -264,7 +276,7 @@
         "freq": "2000",
         "out": "pwm",
         "bcm": true,
-        "x": 890,
+        "x": 1130,
         "y": 240,
         "wires": []
     },
@@ -279,7 +291,7 @@
         "freq": "2000",
         "out": "pwm",
         "bcm": true,
-        "x": 900,
+        "x": 1140,
         "y": 280,
         "wires": []
     },
@@ -344,7 +356,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
+        "x": 900,
         "y": 260,
         "wires": [
             [
@@ -411,7 +423,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 740,
+        "x": 940,
         "y": 440,
         "wires": []
     },
@@ -478,8 +490,8 @@
         "y": 440,
         "wires": [
             [
-                "6d433e31928f676a",
-                "7222be0645547969"
+                "7222be0645547969",
+                "2c8e9ac0490f5f45"
             ]
         ]
     },
@@ -496,7 +508,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 740,
+        "x": 940,
         "y": 480,
         "wires": []
     },
@@ -530,7 +542,7 @@
         "y": 480,
         "wires": [
             [
-                "76f655f507daccca"
+                "2494686add3e0c47"
             ]
         ]
     },
@@ -624,8 +636,8 @@
         "y": 220,
         "wires": [
             [
-                "9a75465297433178",
-                "bfc5f80fe588ce6a"
+                "bfc5f80fe588ce6a",
+                "4fde10a873944d25"
             ]
         ]
     },
@@ -652,7 +664,7 @@
         "y": 260,
         "wires": [
             [
-                "9a75465297433178"
+                "cf0da3b0f6dd6093"
             ]
         ]
     },
@@ -679,7 +691,7 @@
         "y": 300,
         "wires": [
             [
-                "9a75465297433178"
+                "55cb28acee338151"
             ]
         ]
     },
@@ -706,7 +718,7 @@
         "y": 120,
         "wires": [
             [
-                "59c9ea9241657625"
+                "a9d63db5b6c589c5"
             ]
         ]
     },
@@ -733,7 +745,7 @@
         "y": 80,
         "wires": [
             [
-                "59c9ea9241657625"
+                "20498bc635ce05e9"
             ]
         ]
     },
@@ -864,6 +876,153 @@
         "wires": []
     },
     {
+        "id": "2c8e9ac0490f5f45",
+        "type": "flogger",
+        "z": "a0a19026ee2aa347",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 780,
+        "y": 440,
+        "wires": [
+            [
+                "6d433e31928f676a"
+            ]
+        ]
+    },
+    {
+        "id": "2494686add3e0c47",
+        "type": "flogger",
+        "z": "a0a19026ee2aa347",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 780,
+        "y": 480,
+        "wires": [
+            [
+                "76f655f507daccca"
+            ]
+        ]
+    },
+    {
+        "id": "20498bc635ce05e9",
+        "type": "flogger",
+        "z": "a0a19026ee2aa347",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 680,
+        "y": 80,
+        "wires": [
+            [
+                "59c9ea9241657625"
+            ]
+        ]
+    },
+    {
+        "id": "a9d63db5b6c589c5",
+        "type": "flogger",
+        "z": "a0a19026ee2aa347",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 680,
+        "y": 120,
+        "wires": [
+            [
+                "59c9ea9241657625"
+            ]
+        ]
+    },
+    {
+        "id": "4fde10a873944d25",
+        "type": "flogger",
+        "z": "a0a19026ee2aa347",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 680,
+        "y": 220,
+        "wires": [
+            [
+                "9a75465297433178"
+            ]
+        ]
+    },
+    {
+        "id": "cf0da3b0f6dd6093",
+        "type": "flogger",
+        "z": "a0a19026ee2aa347",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 680,
+        "y": 260,
+        "wires": [
+            [
+                "9a75465297433178"
+            ]
+        ]
+    },
+    {
+        "id": "55cb28acee338151",
+        "type": "flogger",
+        "z": "a0a19026ee2aa347",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 680,
+        "y": 300,
+        "wires": [
+            [
+                "9a75465297433178"
+            ]
+        ]
+    },
+    {
         "id": "2640c1a7bd597aea",
         "type": "inject",
         "z": "e2b82f0390a73669",
@@ -880,7 +1039,7 @@
         "topic": "",
         "payload": "openDoor",
         "payloadType": "str",
-        "x": 120,
+        "x": 100,
         "y": 220,
         "wires": [
             [
@@ -942,8 +1101,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 690,
-        "y": 200,
+        "x": 930,
+        "y": 260,
         "wires": []
     },
     {
@@ -973,11 +1132,11 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 200,
+        "y": 260,
         "wires": [
             [
-                "6801c70188b44bee",
-                "ee84a76abb2b6f51"
+                "ee84a76abb2b6f51",
+                "02ecb285fc5e6b6f"
             ]
         ]
     },
@@ -1001,7 +1160,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 280,
+        "y": 340,
         "wires": [
             [
                 "6966829fc0e6b429",
@@ -1019,7 +1178,7 @@
             "3712f0cc13b5575e"
         ],
         "x": 615,
-        "y": 160,
+        "y": 220,
         "wires": []
     },
     {
@@ -1032,7 +1191,7 @@
             "895e66b3fd1a3074"
         ],
         "x": 615,
-        "y": 260,
+        "y": 320,
         "wires": []
     },
     {
@@ -1053,7 +1212,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 660,
-        "y": 300,
+        "y": 360,
         "wires": [
             [
                 "53c54f188520f305",
@@ -1071,7 +1230,7 @@
             "ce1e828ca7718674"
         ],
         "x": 765,
-        "y": 300,
+        "y": 360,
         "wires": []
     },
     {
@@ -1112,8 +1271,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
-        "y": 420,
+        "x": 940,
+        "y": 520,
         "wires": []
     },
     {
@@ -1143,11 +1302,11 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 420,
+        "y": 520,
         "wires": [
             [
-                "772ad042876ec9c8",
-                "7d1bdd544ade3ada"
+                "7d1bdd544ade3ada",
+                "1ed5fb33e884ea5c"
             ]
         ]
     },
@@ -1171,7 +1330,7 @@
         "to": "",
         "reg": false,
         "x": 480,
-        "y": 480,
+        "y": 580,
         "wires": [
             [
                 "1961df39fe58095c",
@@ -1189,7 +1348,7 @@
             "3712f0cc13b5575e"
         ],
         "x": 635,
-        "y": 380,
+        "y": 480,
         "wires": []
     },
     {
@@ -1202,7 +1361,7 @@
             "895e66b3fd1a3074"
         ],
         "x": 615,
-        "y": 480,
+        "y": 580,
         "wires": []
     },
     {
@@ -1223,7 +1382,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 660,
-        "y": 520,
+        "y": 620,
         "wires": [
             [
                 "2c6c25189585387b",
@@ -1241,7 +1400,7 @@
             "7f44ac7fc0bba0c1"
         ],
         "x": 765,
-        "y": 520,
+        "y": 620,
         "wires": []
     },
     {
@@ -1256,7 +1415,7 @@
         "finalize": "",
         "libs": [],
         "x": 820,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "58c2110cca4befe0"
@@ -1281,7 +1440,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 1000,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "3f12457e19c58970"
@@ -1298,7 +1457,7 @@
             "3712f0cc13b5575e"
         ],
         "x": 1295,
-        "y": 560,
+        "y": 660,
         "wires": []
     },
     {
@@ -1314,7 +1473,7 @@
         "finalize": "",
         "libs": [],
         "x": 830,
-        "y": 340,
+        "y": 400,
         "wires": [
             [
                 "0d6094efd7768a60"
@@ -1339,7 +1498,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 1000,
-        "y": 340,
+        "y": 400,
         "wires": [
             [
                 "d7f74417b4fec96d"
@@ -1356,7 +1515,7 @@
             "3712f0cc13b5575e"
         ],
         "x": 1295,
-        "y": 340,
+        "y": 400,
         "wires": []
     },
     {
@@ -1373,7 +1532,8 @@
         "y": 180,
         "wires": [
             [
-                "0d7bd83efe4a16ca"
+                "0d7bd83efe4a16ca",
+                "c62bb2cfbc06a681"
             ]
         ]
     },
@@ -1391,7 +1551,8 @@
         "y": 440,
         "wires": [
             [
-                "ddeb83e1297340db"
+                "ddeb83e1297340db",
+                "0d262e2c15c09db1"
             ]
         ]
     },
@@ -1411,7 +1572,7 @@
         "y": 100,
         "wires": [
             [
-                "e0b503016ae54f60"
+                "149447cb45ed361d"
             ]
         ]
     },
@@ -1456,7 +1617,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 500,
+        "x": 720,
         "y": 100,
         "wires": []
     },
@@ -1522,7 +1683,7 @@
         "to": "",
         "reg": false,
         "x": 1170,
-        "y": 340,
+        "y": 400,
         "wires": [
             [
                 "73d868affed219d7"
@@ -1549,7 +1710,7 @@
         "to": "",
         "reg": false,
         "x": 1170,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "18ca05d70a706a24"
@@ -1574,7 +1735,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 520,
-        "y": 640,
+        "y": 740,
         "wires": [
             [
                 "e2c605019cf80e49"
@@ -1591,7 +1752,7 @@
             "a1b6d2503bf369bd"
         ],
         "x": 475,
-        "y": 600,
+        "y": 700,
         "wires": []
     },
     {
@@ -1604,7 +1765,7 @@
             "94f3a7b5589a92f1"
         ],
         "x": 635,
-        "y": 640,
+        "y": 740,
         "wires": []
     },
     {
@@ -1614,7 +1775,7 @@
         "name": "Open and close door",
         "info": "",
         "x": 550,
-        "y": 680,
+        "y": 780,
         "wires": []
     },
     {
@@ -1697,6 +1858,203 @@
             [
                 "fc4a7c69f842fd77"
             ]
+        ]
+    },
+    {
+        "id": "149447cb45ed361d",
+        "type": "flogger",
+        "z": "e2b82f0390a73669",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 520,
+        "y": 100,
+        "wires": [
+            [
+                "e0b503016ae54f60"
+            ]
+        ]
+    },
+    {
+        "id": "c62bb2cfbc06a681",
+        "type": "flogger",
+        "z": "e2b82f0390a73669",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "67d2654c9802b4bd"
+            ]
+        ]
+    },
+    {
+        "id": "0d262e2c15c09db1",
+        "type": "flogger",
+        "z": "e2b82f0390a73669",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 280,
+        "y": 440,
+        "wires": [
+            [
+                "3ffed838f9746d9d"
+            ]
+        ]
+    },
+    {
+        "id": "1ed5fb33e884ea5c",
+        "type": "flogger",
+        "z": "e2b82f0390a73669",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 720,
+        "y": 520,
+        "wires": [
+            [
+                "772ad042876ec9c8"
+            ]
+        ]
+    },
+    {
+        "id": "02ecb285fc5e6b6f",
+        "type": "flogger",
+        "z": "e2b82f0390a73669",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 720,
+        "y": 260,
+        "wires": [
+            [
+                "6801c70188b44bee"
+            ]
+        ]
+    },
+    {
+        "id": "67d2654c9802b4bd",
+        "type": "change",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "doorStatus",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "d6d08c816c0f2c67"
+            ]
+        ]
+    },
+    {
+        "id": "d6d08c816c0f2c67",
+        "type": "flogger",
+        "z": "e2b82f0390a73669",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 640,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3ffed838f9746d9d",
+        "type": "change",
+        "z": "e2b82f0390a73669",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "doorStatus",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "0751eafd79884e45"
+            ]
+        ]
+    },
+    {
+        "id": "0751eafd79884e45",
+        "type": "flogger",
+        "z": "e2b82f0390a73669",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 620,
+        "y": 440,
+        "wires": [
+            []
         ]
     },
     {
@@ -1930,7 +2288,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1020,
+        "x": 1160,
         "y": 280,
         "wires": [
             [
@@ -1955,7 +2313,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1010,
+        "x": 1160,
         "y": 320,
         "wires": [
             [
@@ -1979,10 +2337,10 @@
         "y": 300,
         "wires": [
             [
-                "8a0f324d803f9c18"
+                "a79970f79794bf61"
             ],
             [
-                "927513d5b5841aea"
+                "f2b5d247e70acb55"
             ]
         ]
     },
@@ -1995,7 +2353,7 @@
         "links": [
             "b6d81c93f138fd0d"
         ],
-        "x": 1145,
+        "x": 1295,
         "y": 280,
         "wires": []
     },
@@ -2008,7 +2366,7 @@
         "links": [
             "adaa373b0354fb61"
         ],
-        "x": 1145,
+        "x": 1295,
         "y": 320,
         "wires": []
     },
@@ -2207,5 +2565,47 @@
         "x": 640,
         "y": 580,
         "wires": []
+    },
+    {
+        "id": "a79970f79794bf61",
+        "type": "flogger",
+        "z": "b41ca36cf9e24066",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 980,
+        "y": 280,
+        "wires": [
+            [
+                "8a0f324d803f9c18"
+            ]
+        ]
+    },
+    {
+        "id": "f2b5d247e70acb55",
+        "type": "flogger",
+        "z": "b41ca36cf9e24066",
+        "name": "Log to file",
+        "logfile": "general_logs",
+        "inputchoice": "fullmsg",
+        "inputobject": "payload",
+        "inputobjectType": "msg",
+        "inputmoustache": "Recieved payload {{payload}} and topic {{topic}}",
+        "loglevel": "INFO",
+        "logconfig": "024210e38cb617e0",
+        "sendpane": "",
+        "x": 980,
+        "y": 320,
+        "wires": [
+            [
+                "927513d5b5841aea"
+            ]
+        ]
     }
 ]
