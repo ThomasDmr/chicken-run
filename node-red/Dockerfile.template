@@ -26,6 +26,7 @@ RUN JOBS=MAX npm install -g --production --unsafe-perm \
     node-red-node-pi-gpio\
     node-red-dashboard\
     node-red-contrib-sunevents\
+    node-red-contrib-flogger\
     && JOBS=MAX npm install --unsafe-perm --production && npm cache clean --force
 
 # Copy over the files created in the previous step, including lib/, bin/
