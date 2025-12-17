@@ -1,0 +1,29 @@
+{
+  "name": "chicken-run",
+  "version": "2.0.0",
+  "description": "A node-red app for controlling a chicken door.",
+  "main": "index.js",
+  "scripts": {
+    "local": "env-cmd -f ./.env  ./_helpers/balena-local.sh",
+    "deploy": "env-cmd -f ./.env  ./_helpers/balena-deploy.sh",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasDmr/chicken-run"
+  },
+  "author": "ThomasDmr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasDmr/chicken-run"
+  },
+  "homepage": "https://github.com/ThomasDmr/chicken-run#readme",
+  "devDependencies": {
+  },
+  "release": {
+    "branches": [
+      "master",
+    ]
+  },
+  "dependencies": {
+    "env-cmd": "^10.1.0"  }
+}

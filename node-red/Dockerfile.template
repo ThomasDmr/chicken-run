@@ -1,29 +1,28 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:14-buster-build
+FROM balenalib/%%BALENA_ARCH%%-node:20-run 
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
+    libudev-dev \
     build-essential \
-    rpi.gpio \
-  	python-dev \
-  	python-rpi.gpio \
+    python3 \
+    python3-pip \
+    libgpiod2 \
+    python-dev-is-python3 \
     libatomic1 \
-    git \
     openssh-client \
+    git \
     unzip \
+    mpg123 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY ./app/sounds /data
 
 # Defines our working directory in container
 WORKDIR /usr/src/app
-COPY ./app/package.json package.json
-
-RUN apt-get update
-RUN apt-get install mpg123
+COPY package*.json ./
 
 RUN JOBS=MAX npm install -g --production --unsafe-perm \
-    node-red@2.2.2\
-    node-red-node-serialport\
-    node-red-node-pi-gpio\
+    node-red \
+    @iiot2k/node-red-gpio \
     node-red-dashboard\
     node-red-contrib-sunevents\
     node-red-contrib-flogger\
@@ -37,4 +36,5 @@ COPY ./app ./
 
 
 # server.js will run when container starts up on the device
+USER root
 CMD ["bash", "/usr/src/app/start.sh"]

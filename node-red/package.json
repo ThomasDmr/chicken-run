@@ -29,8 +29,8 @@
   "homepage": "https://github.com/balenablocks/balena-node-red#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "node-red-contrib-balena" : "^1.0.1",
-    "node-red-node-serialport" : "^1.0.1",
+    "node-red": "^4.0.9",
+    "@iiot2k/node-red-gpio": "^3.0.2",
     "node-red-dashboard": "^3.3.1",
     "node-red-contrib-sun-event-trigger": "^1.1.1", 
     "node-red-contrib-flogger":"^1.2.2"

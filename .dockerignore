@@ -1,2 +1,10 @@
 #ignore the imgs for docs
 /img/
+_helpers/
+_confs/
+# Don't send node_modules the daemon - we want the build server to install these.
+*/node_modules/
+.git
+repo.yml
+*/logs/
+*/.tsconfig.json
