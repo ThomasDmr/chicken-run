@@ -163,36 +163,6 @@
         "logsize": "1000"
     },
     {
-        "id": "7c02300911d9128f",
-        "type": "rpi-gpio out",
-        "z": "a0a19026ee2aa347",
-        "name": "EN (31)",
-        "pin": "6",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 1080,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "c00e85be68a729eb",
-        "type": "rpi-gpio out",
-        "z": "a0a19026ee2aa347",
-        "name": "ENB(33)",
-        "pin": "13",
-        "set": true,
-        "level": "1",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 1080,
-        "y": 120,
-        "wires": []
-    },
-    {
         "id": "1ca9a8bc0450a449",
         "type": "inject",
         "z": "a0a19026ee2aa347",
@@ -224,6 +194,7 @@
         "name": "function 1",
         "func": "\nif (msg.payload === \"enable\")\n{\n    var msg1 = { payload : 1 };\n    var msg2 = { payload: 0 };\n}\nelse if (msg.payload === \"disable\" || msg.payload === \"stop\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 1 };\n}\nreturn [msg1, msg2];",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -232,10 +203,10 @@
         "y": 100,
         "wires": [
             [
-                "7c02300911d9128f"
+                "783ab0abd15edf35"
             ],
             [
-                "c00e85be68a729eb"
+                "49a11b34a2921644"
             ]
         ]
     },
@@ -263,36 +234,6 @@
                 "bfc5f80fe588ce6a"
             ]
         ]
-    },
-    {
-        "id": "1ca3854619153ebe",
-        "type": "rpi-gpio out",
-        "z": "a0a19026ee2aa347",
-        "name": "Forward PWM (35)",
-        "pin": "19",
-        "set": "",
-        "level": "0",
-        "freq": "2000",
-        "out": "pwm",
-        "bcm": true,
-        "x": 1130,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "f9ffd7e9b6b6ed6e",
-        "type": "rpi-gpio out",
-        "z": "a0a19026ee2aa347",
-        "name": "Backward PWM (37)",
-        "pin": "26",
-        "set": "",
-        "level": "0",
-        "freq": "2000",
-        "out": "pwm",
-        "bcm": true,
-        "x": 1140,
-        "y": 280,
-        "wires": []
     },
     {
         "id": "8245f8f083f23278",
@@ -349,20 +290,21 @@
         "type": "function",
         "z": "a0a19026ee2aa347",
         "name": "function 2",
-        "func": "let speed = 100;\n\nif (msg.payload === \"forward\")\n{\n    var msg1 = { payload : speed };\n    var msg2 = { payload: 0 };\n}\nelse if (msg.payload === \"backward\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: speed };\n}\nelse if (msg.payload === \"stop\") {\n    var msg1 = { payload: 0 };\n    var msg2 = { payload: 0 };\n}\nreturn [msg1, msg2];",
+        "func": "let speed = 100;\nvar msg1, msg2;\n\nif (msg.payload === \"forward\")\n{\n    msg1 = { pwm: {duty : speed, freq: 1000} };\n    msg2 = { payload: 0 };\n}\nelse if (msg.payload === \"backward\") {\n    msg1 = { payload: 0 };\n    msg2 = { pwm: {duty : speed, freq: 1000} };\n}\nelse if (msg.payload === \"stop\") {\n    msg1 = { payload: 0 };\n    msg2 = { payload: 0 };\n}\nreturn [msg1, msg2];",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 900,
+        "x": 880,
         "y": 260,
         "wires": [
             [
-                "1ca3854619153ebe"
+                "bfcba1acd77012f4"
             ],
             [
-                "f9ffd7e9b6b6ed6e"
+                "f5ee27d7be1a74e4"
             ]
         ]
     },
@@ -388,24 +330,6 @@
         "wires": [
             [
                 "eb9a1c641ec099e0"
-            ]
-        ]
-    },
-    {
-        "id": "272391d7ba160d1f",
-        "type": "rpi-gpio in",
-        "z": "a0a19026ee2aa347",
-        "name": "End Switch (12)",
-        "pin": "12",
-        "intype": "up",
-        "debounce": "50",
-        "read": true,
-        "bcm": true,
-        "x": 140,
-        "y": 460,
-        "wires": [
-            [
-                "215e37e33bc1bec9"
             ]
         ]
     },
@@ -436,12 +360,12 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "0",
+                "v": "1",
                 "vt": "num"
             },
             {
                 "t": "eq",
-                "v": "1",
+                "v": "0",
                 "vt": "num"
             }
         ],
@@ -555,8 +479,7 @@
             "7222be0645547969",
             "73d868affed219d7",
             "7d1bdd544ade3ada",
-            "ee84a76abb2b6f51",
-            "106484253900cc7a"
+            "ee84a76abb2b6f51"
         ],
         "x": 295,
         "y": 200,
@@ -765,24 +688,6 @@
         ]
     },
     {
-        "id": "98496326d244b7f7",
-        "type": "rpi-gpio in",
-        "z": "a0a19026ee2aa347",
-        "name": "Manual trigger (17)",
-        "pin": "17",
-        "intype": "up",
-        "debounce": "50",
-        "read": true,
-        "bcm": true,
-        "x": 150,
-        "y": 620,
-        "wires": [
-            [
-                "f04ba90f40c4bf50"
-            ]
-        ]
-    },
-    {
         "id": "f04ba90f40c4bf50",
         "type": "switch",
         "z": "a0a19026ee2aa347",
@@ -792,7 +697,7 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "0",
+                "v": "1",
                 "vt": "num"
             }
         ],
@@ -1018,6 +923,92 @@
         "wires": [
             [
                 "9a75465297433178"
+            ]
+        ]
+    },
+    {
+        "id": "783ab0abd15edf35",
+        "type": "iiot2k-gpio-out",
+        "z": "a0a19026ee2aa347",
+        "gpio": "6",
+        "mode": "output",
+        "activate": false,
+        "name": "EN",
+        "x": 1030,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "49a11b34a2921644",
+        "type": "iiot2k-gpio-out",
+        "z": "a0a19026ee2aa347",
+        "gpio": "13",
+        "mode": "output",
+        "activate": true,
+        "name": "ENB",
+        "x": 1030,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "bfcba1acd77012f4",
+        "type": "iiot2k-gpio-out",
+        "z": "a0a19026ee2aa347",
+        "gpio": "19",
+        "mode": "output",
+        "activate": false,
+        "name": "Forward",
+        "x": 1100,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "f5ee27d7be1a74e4",
+        "type": "iiot2k-gpio-out",
+        "z": "a0a19026ee2aa347",
+        "gpio": "26",
+        "mode": "output",
+        "activate": false,
+        "name": "Backwards",
+        "x": 1110,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "143b776b8fa92e54",
+        "type": "iiot2k-gpio-in",
+        "z": "a0a19026ee2aa347",
+        "gpio": "12",
+        "pull": "pullup",
+        "edge": "both",
+        "debounce": "50",
+        "outbool": false,
+        "sendoninit": true,
+        "name": "End Switch",
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "215e37e33bc1bec9"
+            ]
+        ]
+    },
+    {
+        "id": "ba3175724a9ca6cd",
+        "type": "iiot2k-gpio-in",
+        "z": "a0a19026ee2aa347",
+        "gpio": "17",
+        "pull": "pullup",
+        "edge": "both",
+        "debounce": "50",
+        "outbool": false,
+        "sendoninit": false,
+        "name": "Manual Trigger",
+        "x": 160,
+        "y": 620,
+        "wires": [
+            [
+                "f04ba90f40c4bf50"
             ]
         ]
     },
@@ -2731,5 +2722,16 @@
         "x": 650,
         "y": 820,
         "wires": []
+    },
+    {
+        "id": "bb1fd53ad1c78928",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "node-red-contrib-flogger": "1.2.2",
+            "@iiot2k/node-red-gpio": "3.0.2",
+            "node-red-contrib-sunevents": "3.1.1"
+        }
     }
 ]
